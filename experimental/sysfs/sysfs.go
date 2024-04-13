@@ -9,6 +9,7 @@ package sysfs
 
 import (
 	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
+	"github.com/tetratelabs/wazero/internal/fsapi"
 	"github.com/tetratelabs/wazero/internal/sysfs"
 )
 
@@ -34,3 +35,12 @@ func DirFS(dir string) experimentalsys.FS {
 // Note: This implements read-only by returning sys.EROFS or sys.EBADF,
 // depending on the operation that require write access.
 type ReadFS = sysfs.ReadFS
+
+// Pflag are bit flags used for File.Poll. Values, including zero, should not
+// be interpreted numerically. Instead, use by constants prefixed with 'POLL'.
+//
+// # Notes
+//
+//   - This is like `pollfd.events` flags for `poll` in POSIX. See
+//     https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/poll.h.html
+type Pflag = fsapi.Pflag
